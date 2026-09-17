@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =========================================================================
+# AÑADIDO PARA LA TIENDA ONLINE: Variables de entorno y Seguridad
+# =========================================================================
+# Bloquea explícitamente el archivo .env principal y cualquier variante
+.env
+.env.development
+.env.production
+.env.test
+
+# Archivos de certificados y llaves privadas (por si usas HTTPS local)
+*.pem
+*.key
+
+# Dumps y respaldos de bases de datos locales (Mock data, productos, etc.)
+*.sql
+*.json.bak
+
