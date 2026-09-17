@@ -62,12 +62,23 @@ function App() {
       setCarrito(nuevoCarrito)
     }
     const disminuirCantidad = (id)=>{
+
+      const producto = carrito.find(item=>item.id === id);
+      const cantidad = producto.cantidad;
+
+      if(cantidad >1){
+        const nuevoCarrito = carrito.map(item=>item.id === id?{...item, cantidad: item.cantidad - 1} : item);
+        setCarrito(nuevoCarrito)
+      }else{
+        const nuevoCarrito = carrito.filter(item=>item.id !==id);
+        setCarrito(nuevoCarrito)
+      }
       
-      const nuevoCarrito = carrito.map(item=>item.id === id?{...item, cantidad: item.cantidad - 1} : item);
-      console.log(nuevoCarrito)
-      console.log(carrito)
-      setCarrito(nuevoCarrito)
-    }
+      
+     
+      }
+
+    
 
     //Función eliminar del carrito. Recibe el id del producto de Cart de Cart.js
     const eliminarDelCarrito = (id) =>{
