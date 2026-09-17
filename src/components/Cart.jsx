@@ -1,17 +1,19 @@
 const Cart = ({carrito, eliminarDelCarrito, aumentarCantidad, disminuirCantidad}) => {
+    console.log(carrito)
     const totalCarrito = carrito.reduce((suma, producto)=>suma+producto.precio*producto.cantidad,0)
         return(
             <div>
                 {
                     carrito.map((producto)=>{
                         const {id, nombre, precio, categoria, stock,cantidad}=producto;
+                        const stotckDisponible = stock-cantidad;
                         return(
                             <div key={id}>
                                 <h3>{nombre}</h3>
-                                <p>Precio: ${precio}</p>
+                                <p>Precio unitario: ${precio}</p>
                                 <p>Cantidad: {cantidad}</p>
-                                <p>Categoría{categoria}</p>
-                                <p>{stock} disponibles</p>
+                                <p>Subtotal {cantidad*precio}</p>
+                                <p>{stotckDisponible} Disponible</p>
                                 <button onClick={()=>disminuirCantidad(id)}>-</button>
                                 <button onClick={()=>aumentarCantidad(id)}>+</button>
                                 <button onClick={()=>eliminarDelCarrito(id)}>Eliminar</button>
