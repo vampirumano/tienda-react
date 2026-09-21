@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -39,8 +39,14 @@ const productos = [
 function App() {
 
     //Estado del carrito
+    
+    const carritoGuardado = localStorage.getItem('carrito');
+    
+    
 
-    const [carrito, setCarrito]= useState([]);
+    const [carrito, setCarrito]= useState(carritoGuardado === null? []: JSON.parse(carritoGuardado));
+
+    
 
     //Función agregar al carrito. Recibe el producto de ProductCard al hacer click en el botón
     const agregarAlCarrito = (producto) =>{
@@ -77,7 +83,26 @@ function App() {
     //Función eliminar del carrito. Recibe el id del producto de Cart de Cart.js
     const eliminarDelCarrito = (id) =>{
       setCarrito(carrito.filter(producto=> producto.id !== id))
-    }
+    };
+
+    //Cantidad de productos en el carrito
+    const totalProductos = carrito.reduce((total, producto)=>total + producto.cantidad,0);
+
+    useEffect(()=>{
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      
+      
+    },[carrito]);
+
+    
+
+
+    // const carritoLS = localStorage.getItem("carrito");
+    // console.log(typeof carritoLS);
+
+    // const carritoRecuperado = JSON.parse(carritoLS);
+    // console.log(typeof carritoRecuperado)
+
 
 
   return (
@@ -96,7 +121,8 @@ function App() {
           
         })
       }
-      {carrito.length === 0? <p>Carrito vacío</p>: <p>Productos en el carrito ({carrito.length})</p>}
+      {carrito.length === 0? <p>Carrito vacío</p>: <p>Productos en el carrito ({totalProductos})</p>}
+      <p>Productos diferentes {carrito.length}</p>
 
       <Cart
         carrito = {carrito}

@@ -1,5 +1,5 @@
 const Cart = ({carrito, eliminarDelCarrito, aumentarCantidad, disminuirCantidad}) => {
-    console.log(carrito)
+    
     const totalCarrito = carrito.reduce((suma, producto)=>suma+producto.precio*producto.cantidad,0)
         return(
             <div>
@@ -11,7 +11,7 @@ const Cart = ({carrito, eliminarDelCarrito, aumentarCantidad, disminuirCantidad}
                             <div key={id}>
                                 <h3>{nombre}</h3>
                                 <p>Precio unitario: ${precio}</p>
-                                <p>Cantidad: {cantidad}</p>
+                                <p>Unidades: {cantidad}</p>
                                 <p>Subtotal {cantidad*precio}</p>
                                 <p>{stotckDisponible} Disponible</p>
                                 <button onClick={()=>disminuirCantidad(id)}>-</button>
