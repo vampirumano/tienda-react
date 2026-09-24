@@ -46,6 +46,19 @@ function App() {
 
     const [carrito, setCarrito]= useState(carritoGuardado === null? []: JSON.parse(carritoGuardado));
 
+    //Estado del input
+    const [busqueda, setBusqueda] = useState("");
+    //console.log(busqueda);
+
+  
+
+    //Productos filtrados
+    const productosFiltrados = productos.filter(item=> {
+      const nombreProducto = item.nombre.toLowerCase();
+      const nombreBusqueda = busqueda.toLowerCase();
+      return nombreProducto.includes(nombreBusqueda)
+    });
+    
     
 
     //Función agregar al carrito. Recibe el producto de ProductCard al hacer click en el botón
@@ -108,19 +121,33 @@ function App() {
   return (
     <div>
       <Header/>
+      <input
+        type="text"
+        placeholder='Buscar producto'
+        value={busqueda}
+        onChange={e=>setBusqueda(e.target.value)}
+
+      />
       <p>La mejor tienda online</p>
       <p>Explora nuestros productos</p>
       <button>Ver productos</button>
-      {
-        productos.map(producto=>{
 
+      {
+        productosFiltrados.length === 0 ? <p>Producto no encontrado</p>:productosFiltrados.map(producto=>{
           return(
+            
             <ProductCard key={producto.id} producto={producto} agregarAlCarrito={agregarAlCarrito}/>
           )
           
           
         })
       }
+      
+
+      {
+
+      }
+
       {carrito.length === 0? <p>Carrito vacío</p>: <p>Productos en el carrito ({totalProductos})</p>}
       <p>Productos diferentes {carrito.length}</p>
 
